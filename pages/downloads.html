@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiBridge - Downloads</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+  body {
+    background: #f7f7f7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0 16px;
+  }
+
+  .section-title {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .class-card-wrapper {
+    margin-bottom: 30px;
+  }
+
+  .class-header {
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #0056b3;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .card {
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: #ffffff;
+    padding: 28px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card:hover {
+    transform: scale(1.015);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-header-content {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .card-header-content h6 {
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .pdf-list {
+    flex-grow: 1;
+  }
+
+  .pdf-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .pdf-item:last-child {
+    border-bottom: none;
+  }
+
+  .pdf-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+    margin-right: 12px;
+  }
+
+  .download-btn {
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    background-color: #0069d9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.15s ease;
+    box-shadow: 0 2px 6px rgba(0, 105, 217, 0.15);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .download-btn:hover {
+    background-color: #004ea2;
+    transform: translateY(-2px);
+    color: #fff;
+  }
+
+  .download-btn:active {
+    transform: scale(0.98);
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  .back-to-top:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+
+  /* Ensure consistent height across all cards */
+  .row-equal-height {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .row-equal-height > .col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      padding: 24px;
+    }
+
+    .pdf-item {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px;
+    }
+
+    .pdf-name {
+      margin-bottom: 8px;
+    }
+
+    .download-btn {
+      margin-top: 8px;
+      align-self: flex-end;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">DigiBridge</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="skills.html">Learn Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link active" href="downloads.html">Downloads</a></li>
+          <li class="nav-item"><a class="nav-link" href="help.html">Help</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="container text-center my-4">
+    <h3 class="fw-bold section-title">
+      <i class="fas fa-download text-danger me-2"></i>Download <span class="text-primary">Class-wise</span> Study Material
+    </h3>
+    <p class="text-muted">Multiple PDF files available for each class from 1 to 12.</p>
+  </div>
+
+  <!-- Download Cards -->
+  <div class="container mb-5">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 row-equal-height">
+
+      <!-- CLASS 1 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 1</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-child fa-2x text-info mb-2"></i>
+              <h6>Class 1 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics Basics</span>
+                <a href="../assets/pdfs/1.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English Letters</span>
+                <a href="../assets/pdfs/2.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi Basics</span>
+                <a href="../assets/pdfs/3.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Environmental Studies</span>
+                <a href="../assets/pdfs/4.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Art and Craft</span>
+                <a href="../assets/pdfs/5.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 2 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 2</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-child fa-2x text-success mb-2"></i>
+              <h6>Class 2 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/6.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English Grammar</span>
+                <a href="../assets/pdfs/7.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi Grammar</span>
+                <a href="../assets/pdfs/8.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Environmental Studies</span>
+                <a href="../assets/pdfs/9.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Art and Craft</span>
+                <a href="../assets/pdfs/10.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 3 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 3</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-child fa-2x text-warning mb-2"></i>
+              <h6>Class 3 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/11.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/12.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/13.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Environmental Studies</span>
+                <a href="../assets/pdfs/14.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Physical Education</span>
+                <a href="../assets/pdfs/15.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 4 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 4</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-child fa-2x text-danger mb-2"></i>
+              <h6>Class 4 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/16.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/17.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/18.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Environmental Studies</span>
+                <a href="../assets/pdfs/19.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Art and Craft</span>
+                <a href="../assets/pdfs/20.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 5 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 5</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-child fa-2x text-secondary mb-2"></i>
+              <h6>Class 5 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/21.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/22.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/23.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Environmental Studies</span>
+                <a href="../assets/pdfs/24.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Art and craft</span>
+                <a href="../assets/pdfs/25.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 6 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 6</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-user-graduate fa-2x text-dark mb-2"></i>
+              <h6>Class 6 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/26.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/27.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/28.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Science</span>
+                <a href="../assets/pdfs/29.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Social Studies</span>
+                <a href="../assets/pdfs/30.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 7 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 7</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-user-graduate fa-2x text-primary mb-2"></i>
+              <h6>Class 7 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/31.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/32.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/33.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Science</span>
+                <a href="../assets/pdfs/34.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Social Studies</span>
+                <a href="../assets/pdfs/35.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 8 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 8</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-user-graduate fa-2x text-info mb-2"></i>
+              <h6>Class 8 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/36.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/37.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/38.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Science</span>
+                <a href="../assets/pdfs/39.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Social Studies</span>
+                <a href="../assets/pdfs/40.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 9 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 9</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-graduation-cap fa-2x text-success mb-2"></i>
+              <h6>Class 9 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/41.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/42.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/43.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Science</span>
+                <a href="../assets/pdfs/44.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Social Studies</span>
+                <a href="../assets/pdfs/45.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 10 -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 10</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-graduation-cap fa-2x text-warning mb-2"></i>
+              <h6>Class 10 Study Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/46.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/47.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Hindi</span>
+                <a href="../assets/pdfs/48.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Science</span>
+                <a href="../assets/pdfs/49.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Social Studies</span>
+                <a href="../assets/pdfs/50.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 11 Science -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 11 (Science)</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-flask fa-2x text-danger mb-2"></i>
+              <h6>Class 11 Science Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Maths</span>
+                <a href="../assets/pdfs/51.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Physics</span>
+                <a href="../assets/pdfs/52.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Chemistry</span>
+                <a href="../assets/pdfs/53.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Biology</span>
+                <a href="../assets/pdfs/54.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/55.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 11 Commerce -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 11 (Commerce)</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-chart-line fa-2x text-secondary mb-2"></i>
+              <h6>Class 11 Commerce Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Accountancy</span>
+                <a href="../assets/pdfs/56.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Business Studies</span>
+                <a href="../assets/pdfs/57.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Economics</span>
+                <a href="../assets/pdfs/58.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/51.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/55.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 11 Arts -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 11 (Arts)</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-palette fa-2x text-info mb-2"></i>
+              <h6>Class 11 Arts Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">History</span>
+                <a href="../assets/pdfs/59.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Geography</span>
+                <a href="../assets/pdfs/60.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Political Science</span>
+                <a href="../assets/pdfs/61.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Psychology</span>
+                <a href="../assets/pdfs/62.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/55.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 12 Science -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 12 (Science)</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-atom fa-2x text-success mb-2"></i>
+              <h6>Class 12 Science Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Maths</span>
+                <a href="../assets/pdfs/66.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Physics</span>
+                <a href="../assets/pdfs/67.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Chemistry</span>
+                <a href="../assets/pdfs/68.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Biology</span>
+                <a href="../assets/pdfs/69.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/70.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 12 Commerce -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 12 (Commerce)</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-coins fa-2x text-warning mb-2"></i>
+              <h6>Commerce Stream Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Accountancy</span>
+                <a href="../assets/pdfs/86.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Economics</span>
+                <a href="../assets/pdfs/85.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Business Studies</span>
+                <a href="../assets/pdfs/84.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Mathematics</span>
+                <a href="../assets/pdfs/66.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/70.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CLASS 12 Arts -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <h5 class="text-primary class-header">Class 12 (Arts)</h5>
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-landmark fa-2x text-primary mb-2"></i>
+              <h6>Arts Stream Materials</h6>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">History</span>
+                <a href="../assets/pdfs/83.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Geography</span>
+                <a href="../assets/pdfs/82.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Political Science</span>
+                <a href="../assets/pdfs/81.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">Psychology</span>
+                <a href="../assets/pdfs/80.pdf" download class="download-btn">Download</a>
+              </div>
+              <div class="pdf-item">
+                <span class="pdf-name">English</span>
+                <a href="../assets/pdfs/70.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- end row -->
+  </div> <!-- end container -->
+
+  <!-- Digital Guide Booklets Section -->
+  <div class="container mb-5">
+    <h3 class="fw-bold section-title">
+      <i class="fas fa-book-open text-success me-2"></i>Digital <span class="text-primary">Guide Booklets</span>
+    </h3>
+    <p class="text-muted text-center mb-4">Comprehensive digital guides for various educational topics and skills</p>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 row-equal-height">
+      
+      <!-- Study Techniques Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+              <h6>Study Techniques Guide</h6>
+              <p class="text-muted small">Effective methods for better learning and retention</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide </span>
+                <a href="../assets/pdfs/a.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Digital Literacy Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-laptop fa-3x text-info mb-3"></i>
+              <h6>Digital Literacy Guide</h6>
+              <p class="text-muted small">Essential computer and internet skills for students</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide </span>
+                <a href="../assets/pdfs/b.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Career Planning Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-compass fa-3x text-warning mb-3"></i>
+              <h6>Career Planning Guide</h6>
+              <p class="text-muted small">Step-by-step career guidance for students</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide </span>
+                <a href="../assets/pdfs/c.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exam Preparation Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-clipboard-check fa-3x text-danger mb-3"></i>
+              <h6>Exam Preparation Guide</h6>
+              <p class="text-muted small">Strategies for effective exam preparation and stress management</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide </span>
+                <a href="../assets/pdfs/d.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Time Management Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-clock fa-3x text-secondary mb-3"></i>
+              <h6>Time Management Guide</h6>
+              <p class="text-muted small">Effective time management techniques for students</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide </span>
+                <a href="../assets/pdfs/e.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Research Skills Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-search fa-3x text-success mb-3"></i>
+              <h6>Research Skills Guide</h6>
+              <p class="text-muted small">How to conduct effective academic research</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide </span>
+                <a href="../assets/pdfs/f.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Communication Skills Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-comments fa-3x text-info mb-3"></i>
+              <h6>Communication Skills Guide</h6>
+              <p class="text-muted small">Improve verbal and written communication skills</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide </span>
+                <a href="../assets/pdfs/g.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financial Literacy Guide -->
+      <div class="col">
+        <div class="class-card-wrapper">
+          <div class="card shadow-sm">
+            <div class="card-header-content">
+              <i class="fas fa-piggy-bank fa-3x text-warning mb-3"></i>
+              <h6>Financial Literacy Guide</h6>
+              <p class="text-muted small">Basic financial concepts and money management</p>
+            </div>
+            <div class="pdf-list">
+              <div class="pdf-item">
+                <span class="pdf-name">Complete Guide</span>
+                <a href="../assets/pdfs/h.pdf" download class="download-btn">Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- end digital guides row -->
+  </div> <!-- end digital guides container -->
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-primary back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

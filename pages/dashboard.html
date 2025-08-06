@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Profile - DigiBridge</title>
+  <meta name="description" content="Manage your DigiBridge profile and personal information." />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    /* Your original CSS here */
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #f39c12;
+      --success-color: #27ae60;
+      --info-color: #17a2b8;
+      --warning-color: #f39c12;
+    }
+    body {
+      padding-top: 80px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      min-height: 100vh;
+    }
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .profile-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 15px;
+      padding: 2rem;
+      color: white;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .profile-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+      50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+    }
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .profile-avatar:hover {
+      transform: scale(1.05);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+    .profile-avatar i {
+      font-size: 4rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .profile-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: none;
+      overflow: hidden;
+    }
+    .form-control, .form-select {
+      border-radius: 10px;
+      border: 2px solid #e9ecef;
+      padding: 12px 15px;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      border-radius: 10px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    }
+    .btn-outline-secondary {
+      border-radius: 10px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-outline-secondary:hover {
+      transform: translateY(-2px);
+    }
+    .progress-section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    .progress {
+      height: 10px;
+      border-radius: 5px;
+      background: #e9ecef;
+    }
+    .progress-bar {
+      background: linear-gradient(90deg, var(--success-color), var(--secondary-color));
+      border-radius: 5px;
+    }
+    .achievement-badge {
+      background: linear-gradient(135deg, var(--warning-color), #e67e22);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin: 0.25rem;
+    }
+    .footer {
+      background: #1a1a1a;
+      margin-top: 3rem;
+    }
+    .avatar-options {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      z-index: 1000;
+      min-width: 200px;
+    }
+    .avatar-options.show {
+      display: block;
+    }
+    .avatar-option {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin: 0.25rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .avatar-option:hover {
+      border-color: var(--secondary-color);
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+      <a class="navbar-brand text-primary" href="../index.html">
+        <i class="fas fa-bridge me-2"></i>DigiBridge
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="downloads.html">Downloads</a></li>
+          <li class="nav-item"><a class="nav-link" href="help.html">Help</a></li>
+          <li class="nav-item">
+            <a class="nav-link active" href="profile.html" title="My Profile">
+              <i class="fas fa-user-circle"></i>
+            </a>
+          </li>
+          <li class="nav-item ms-3">
+            <!-- Logout button -->
+            <button class="btn btn-danger btn-sm" id="logoutBtn" title="Logout">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile Header -->
+  <section class="py-5">
+    <div class="container">
+      <div class="profile-header">
+        <div class="row align-items-center">
+          <div class="col-md-3 text-center">
+            <div class="profile-avatar position-relative" onclick="toggleAvatarOptions()">
+              <i class="fas fa-user" id="currentAvatar"></i>
+              <div class="avatar-options" id="avatarOptions">
+                <div class="text-center mb-2">
+                  <small class="text-muted">Choose Avatar</small>
+                </div>
+                <div class="avatar-option bg-primary text-white" onclick="changeAvatar('fas fa-user')">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="avatar-option bg-success text-white" onclick="changeAvatar('fas fa-user-graduate')">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="avatar-option bg-warning text-white" onclick="changeAvatar('fas fa-user-tie')">
+                  <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="avatar-option bg-info text-white" onclick="changeAvatar('fas fa-user-friends')">
+                  <i class="fas fa-user-friends"></i>
+                </div>
+                <div class="avatar-option bg-danger text-white" onclick="changeAvatar('fas fa-heart')">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="avatar-option bg-dark text-white" onclick="changeAvatar('fas fa-star')">
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <h1 class="display-6 fw-bold mb-2" id="profileDisplayName">Welcome to DigiBridge!</h1>
+            <p class="lead mb-3" id="profileDisplayInfo">Complete your profile to get started with personalized learning</p>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="achievement-badge">
+                <i class="fas fa-medal me-1"></i>New Member
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress Section -->
+  <section>
+    <div class="container">
+      <div class="progress-section">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="fw-bold mb-3">
+              <i class="fas fa-chart-line text-primary me-2"></i>Learning Progress
+            </h5>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between mb-1">
+                <small class="text-muted">Profile Completion</small>
+                <small class="text-muted" id="profileProgress">0%</small>
+              </div>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 0%" id="profileProgressBar"></div>
+              </div>
+            </div>
+
+            <div class="text-muted mt-2">
+              <small>Complete your profile to unlock more achievements!</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profile Form -->
+  <section class="pb-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="profile-card card">
+            <div class="card-header bg-white py-3">
+              <h4 class="mb-0">
+                <i class="fas fa-user-edit text-primary me-2"></i>My Profile Information
+              </h4>
+            </div>
+            <div class="card-body p-4">
+              <form id="profileForm">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="firstName" class="form-label fw-semibold">
+                      <i class="fas fa-user me-1"></i>First Name *
+                    </label>
+                    <input type="text" class="form-control" id="firstName" required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="lastName" class="form-label fw-semibold">
+                      <i class="fas fa-user me-1"></i>Last Name
+                    </label>
+                    <input type="text" class="form-control" id="lastName" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="phoneNumber" class="form-label fw-semibold">
+                      <i class="fas fa-phone me-1"></i>Phone Number *
+                    </label>
+                    <input type="tel" class="form-control" id="phoneNumber" placeholder="+91 98765 43210" required />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="village" class="form-label fw-semibold">
+                      <i class="fas fa-map-marker-alt me-1"></i>Village/Town
+                    </label>
+                    <input type="text" class="form-control" id="village" placeholder="Enter your village or town" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="age" class="form-label fw-semibold">
+                      <i class="fas fa-calendar me-1"></i>Age
+                    </label>
+                    <select class="form-select" id="age">
+                      <option value="">Select Age Range</option>
+                      <option value="18-25">18-25 years</option>
+                      <option value="26-35">26-35 years</option>
+                      <option value="36-45">36-45 years</option>
+                      <option value="46-55">46-55 years</option>
+                      <option value="56-65">56-65 years</option>
+                      <option value="65+">65+ years</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="education" class="form-label fw-semibold">
+                      <i class="fas fa-graduation-cap me-1"></i>Education Level
+                    </label>
+                    <select class="form-select" id="education">
+                      <option value="">Select Education Level</option>
+                      <option value="primary">Primary School</option>
+                      <option value="secondary">Secondary School</option>
+                      <option value="higher-secondary">Higher Secondary</option>
+                      <option value="graduate">Graduate</option>
+                      <option value="postgraduate">Post Graduate</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="occupation" class="form-label fw-semibold">
+                    <i class="fas fa-briefcase me-1"></i>Occupation
+                  </label>
+                  <input type="text" class="form-control" id="occupation" placeholder="e.g., Farmer, Student, Homemaker, etc." />
+                </div>
+
+                <div class="mb-4">
+                  <label for="digitalExperience" class="form-label fw-semibold">
+                    <i class="fas fa-laptop me-1"></i>Digital Experience Level
+                  </label>
+                  <select class="form-select" id="digitalExperience">
+                    <option value="">Select your experience level</option>
+                    <option value="beginner">Beginner - New to computers and internet</option>
+                    <option value="basic">Basic - Can use phone/basic apps</option>
+                    <option value="intermediate">Intermediate - Comfortable with technology</option>
+                    <option value="advanced">Advanced - Good with computers and internet</option>
+                  </select>
+                </div>
+
+                <div class="d-flex gap-3 justify-content-end">
+                  <button type="button" class="btn btn-outline-secondary" onclick="clearForm()">
+                    <i class="fas fa-undo me-1"></i>Clear
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-1"></i>Save Profile
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <h5 class="mb-3">
+            <i class="fas fa-bridge me-2"></i>DigiBridge
+          </h5>
+          <p class="text-white-50 mb-4">
+            Bridging the digital divide through education, resources, and community support. Technology access for all.
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h6 class="mb-3">Quick Links</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="../index.html" class="text-white-50">Home</a></li>
+            <li class="mb-2"><a href="skills.html" class="text-white-50">Skills</a></li>
+            <li class="mb-2"><a href="resources.html" class="text-white-50">Resources</a></li>
+            <li class="mb-2"><a href="downloads.html" class="text-white-50">Downloads</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h6 class="mb-3">Support</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="help.html" class="text-white-50">Help Center</a></li>
+            <li class="mb-2"><a href="help.html" class="text-white-50">FAQ</a></li>
+            <li class="mb-2"><a href="help.html" class="text-white-50">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <h6 class="mb-3">Get In Touch</h6>
+          <p class="text-white-50 mb-2">
+            <i class="fas fa-envelope me-2"></i>support@digibridge.org
+          </p>
+          <p class="text-white-50 mb-0">
+            <i class="fas fa-map-marker-alt me-2"></i>Available Worldwide
+          </p>
+        </div>
+      </div>
+      <hr class="border-white-50 my-4" />
+      <div class="text-center">
+        <p class="text-white-50 mb-0">&copy; 2024 DigiBridge. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Logout Button -->
+  <button class="btn btn-danger" id="logoutBtn" style="position: fixed; top: 90px; right: 20px; z-index: 1050;">
+    <i class="fas fa-sign-out-alt"></i> Logout
+  </button>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // JWT token check on page load
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+      window.location.href = 'profile.html';
+    }
+
+    // Fetch user dashboard data securely
+    fetch('http://localhost:3000/api/dashboard', {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          window.location.href = 'profile.html';
+          throw new Error('Unauthorized');
+        }
+        return res.json();
+      })
+      .then(data => {
+        document.getElementById('profileDisplayName').textContent = "Welcome, " + (data.userEmail || 'User') + "!";
+        // You can add more DOM updates here based on data
+      })
+      .catch(err => console.error(err));
+
+    // Logout button functionality
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('jwtToken');
+      window.location.href = 'profile.html';  // Redirect after logout
+    });
+
+    // Avatar UI functions
+    function toggleAvatarOptions() {
+      const avatarOptions = document.getElementById('avatarOptions');
+      avatarOptions.classList.toggle('show');
+    }
+
+    function changeAvatar(iconClass) {
+      document.getElementById('currentAvatar').className = iconClass;
+      document.getElementById('avatarOptions').classList.remove('show');
+    }
+
+    document.addEventListener('click', (e) => {
+      const avatarContainer = document.querySelector('.profile-avatar');
+      const avatarOptions = document.getElementById('avatarOptions');
+      if (!avatarContainer.contains(e.target)) {
+        avatarOptions.classList.remove('show');
+      }
+    });
+
+    localStorage.setItem('profileComplete', 'true');
+
+  </script>
+</body>
+</html>

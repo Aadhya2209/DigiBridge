@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DigiBridge | Profile</title>
+  <style>
+    /* Your original CSS (copy all your styles here) ... */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #f39c12;
+      --success-color: #27ae60;
+      --danger-color: #e74c3c;
+      --warning-color: #f39c12;
+      --light-bg: #f8f9fa;
+      --white: #ffffff;
+      --text-dark: #2c3e50;
+      --text-muted: #6c757d;
+      --border-color: #dee2e6;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--light-bg), #e9ecef);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-card {
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+      50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+    }
+
+    .card-header h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-header p {
+      opacity: 0.9;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-body {
+      padding: 2.5rem;
+    }
+
+    .input-group {
+      margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .input-group label {
+      flex: 1 0 150px;
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 1.1rem;
+      align-self: center;
+    }
+
+    .input-group input, .input-group select {
+      flex: 2 0 250px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: var(--white);
+      transition: border-color 0.3s ease;
+    }
+
+    .input-group input:focus, .input-group select:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      transform: scale(1.02);
+    }
+
+    .qr-container {
+      text-align: center;
+      margin: 2rem 0;
+      background: linear-gradient(145deg, #f8f9fa, #ffffff);
+      border-radius: 15px;
+      border: 2px dashed var(--border-color);
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .qr-container.has-qr {
+      border-color: var(--success-color);
+      background: linear-gradient(145deg, #f0fff4, #ffffff);
+    }
+
+    #qrCodeImage {
+      margin-top: 1.5rem;
+      max-width: 220px;
+    }
+
+    .btn {
+      cursor: pointer;
+      padding: 12px 26px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: none;
+      color: var(--white);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success-color), #2ecc71);
+      box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+      color: var(--white);
+      margin-left: 1rem;
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    }
+
+    #resultMessage {
+      margin-top: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--danger-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>👤 Welcome to Your Profile</h2>
+    <div class="profile-card">
+      <div class="card-header">
+        <h3>🔐 Two-Factor Authentication</h3>
+        <p>Secure your account with Google Authenticator</p>
+      </div>
+      <div class="card-body">
+        <div class="input-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" required placeholder="Enter your email" />
+        </div>
+        <div class="input-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" placeholder="First Name" />
+        </div>
+        <div class="input-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" placeholder="Last Name" />
+        </div>
+        <div class="input-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" placeholder="Phone number" />
+        </div>
+        <!-- Add similar inputs for village, ageRange, educationLevel, occupation, experienceLevel as needed -->
+        
+        <button class="btn btn-primary" onclick="submitProfile()">Save Profile & Generate QR</button>
+        
+        <div class="qr-container" id="qr-container" style="display:none;">
+          <p>Scan this QR code with your authenticator app:</p>
+          <img id="qrCodeImage" alt="QR Code to scan" />
+        </div>
+        
+        <div class="input-group" style="margin-top: 2rem;">
+          <label for="totpCode">Enter 6-digit code from app</label>
+          <input type="text" id="totpCode" maxlength="6" placeholder="000000" />
+          <button class="btn btn-success" onclick="verifyTOTP()">Verify Code</button>
+        </div>
+        
+        <div id="resultMessage"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function submitProfile() {
+      // Gather form data
+      const profileData = {
+        email: document.getElementById('email').value.trim(),
+        firstName: document.getElementById('firstName').value.trim(),
+        lastName: document.getElementById('lastName').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        // Add other fields here if you add their inputs
+      };
+
+      if (!profileData.email) {
+        document.getElementById('resultMessage').textContent = "Email is required.";
+        return;
+      }
+
+      document.getElementById('resultMessage').textContent = "";
+
+      try {
+        const res = await fetch('http://localhost:3000/api/auth/profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(profileData)
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          document.getElementById('qr-container').style.display = 'block';
+          const qrImg = document.getElementById('qrCodeImage');
+          qrImg.src = data.qrCodeDataURL;
+          document.getElementById('resultMessage').style.color = 'var(--success-color)';
+          document.getElementById('resultMessage').textContent = 'Profile saved! Scan the QR code with your authenticator app and enter the 6-digit code below.';
+        } else {
+          document.getElementById('resultMessage').style.color = 'var(--danger-color)';
+          document.getElementById('resultMessage').textContent = data.error || 'Failed to save profile.';
+        }
+      } catch (error) {
+        document.getElementById('resultMessage').style.color = 'var(--danger-color)';
+        document.getElementById('resultMessage').textContent = 'Network error: ' + error.message;
+      }
+    }
+
+    async function verifyTOTP() {
+      const email = document.getElementById('email').value.trim();
+      const token = document.getElementById('totpCode').value.trim();
+
+      if (!token || token.length !== 6) {
+        document.getElementById('resultMessage').style.color = 'var(--danger-color)';
+        document.getElementById('resultMessage').textContent = 'Enter a valid 6-digit code.';
+        return;
+      }
+
+      try {
+        const res = await fetch('http://localhost:3000/api/auth/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, token })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.token) {
+          localStorage.setItem('jwtToken', data.token);
+          document.getElementById('resultMessage').style.color = 'var(--success-color)';
+          document.getElementById('resultMessage').textContent = '2FA verified! Redirecting to dashboard...';
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 1500);
+        } else {
+          document.getElementById('resultMessage').style.color = 'var(--danger-color)';
+          document.getElementById('resultMessage').textContent = data.error || 'Invalid verification code.';
+        }
+      } catch (error) {
+        document.getElementById('resultMessage').style.color = 'var(--danger-color)';
+        document.getElementById('resultMessage').textContent = 'Network error: ' + error.message;
+      }
+    }
+  </script>
+</body>
+</html>

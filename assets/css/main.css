@@ -1,0 +1,21 @@
+#carouselSection img {
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  bottom: 20px;
+}
+
+.card {
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+h5 {
+  margin-bottom: 8px;
+}
